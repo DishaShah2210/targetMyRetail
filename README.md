@@ -27,9 +27,9 @@ insert into myretail.product (name,price_id,brand_id,product_id)values("The Big 
 
 #Run as spring boot app
 
-##three apis :-
+##Three APIs :-
 
-#To get product details for a product:-
+###To get product details for a product:-
 METHOD TYPE :-GET
 
 product Id is 13860428 that we need send in URL 
@@ -59,7 +59,7 @@ if not successfull:-
 then Internal Server Error with the message saying "product not found" if product is not found in the repository
 
 
-#To get price details for a product:-
+####To get price details for a product:-
 
 METHOD TYPE :-GET
 
@@ -84,7 +84,7 @@ if not successfull:-
 then Internal Server Error with the message saying "product not found" if product is not found in the repository
 
 
-#To update product price for a product:-
+###To update product price for a product:-
 
 METHOD TYPE :-POST
 
