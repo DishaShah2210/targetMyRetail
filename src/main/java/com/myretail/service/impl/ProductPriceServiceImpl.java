@@ -110,13 +110,8 @@ public class ProductPriceServiceImpl implements ProductPriceServiceInf{
 			return response.getBody().getProduct().getItem().getProduct_description().getTitle();
 
 		}
-		else
-		{	
-			MyRetailApplication.logger.error("StackTrace retriveNameByProductId");
-			throw new ServiceException("Error in External Product Api ,Product Not Found");
-		}
 	    }
-		catch(HttpClientErrorException ex)
+		catch(Exception ex)
 		{
 			throw new ServiceException("Error in External Product Api,Product Not Found");
 		}
