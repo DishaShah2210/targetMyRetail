@@ -78,13 +78,4 @@ public class PriceController {
 
 	}
 	
-	@RequestMapping(value="/hello",method = RequestMethod.GET)
-	public ResponseEntity<?> printhello()
-	{
-		
-		return new ResponseEntity<>("hello", HttpStatus.OK);	
-	
-		
-	}
-	
 }
