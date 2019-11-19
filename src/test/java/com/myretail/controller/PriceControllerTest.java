@@ -42,5 +42,55 @@ public class PriceControllerTest {
 		.andExpect(status().isOk());
     }
 
+	    @Test
+    public void productPriceDetailsResponse() throws Exception {
+		MvcResult mvcResult =	mockMvc.perform(get("/products/13860428").contentType(MediaType.APPLICATION_JSON_VALUE)).andReturn();
+		int status = mvcResult.getResponse().getStatus();
+		assertEquals(200, status);
+		String content = mvcResult.getResponse().getContentAsString();
+		ProductPriceResponse response = new ObjectMapper().readValue(content, ProductPriceResponse.class);
+
+		if(response !=null) {
+				assert("The Big Lebowski (Blu-ray)".equals(response.getName()));
+				assert(response.getCurrentPrice().getValue() == 1300D);
+			
+		}
+    }
+
+    
+    @Test
+    public void priceDetailsResponse() throws Exception {
+		MvcResult mvcResult =	mockMvc.perform(get("/product/13860428/price").contentType(MediaType.APPLICATION_JSON_VALUE)).andReturn();
+		int status = mvcResult.getResponse().getStatus();
+		assertEquals(200, status);
+		String content = mvcResult.getResponse().getContentAsString();
+		PriceResponse response = new ObjectMapper().readValue(content, PriceResponse.class);
+
+		if(response !=null) {
+				assert(response.getValue() == 1300D);
+			
+		}
+    }
+
+	
+	@Test
+	public void updateProductPrice() throws Exception {
+		String productPrice ="{\n" + 
+				"    \"id\": 13860428,\n" + 
+				"    \"name\": \"The Big Lebowski (Blu-ray)\",\n" + 
+				"    \"current_price\": {\n" + 
+				"        \"value\": 1300,\n" + 
+				"        \"currency_code\": \"rupee\"\n" + 
+				"    }\n" + 
+				"}";
+	
+		MvcResult mvcResult = mockMvc.perform(
+				MockMvcRequestBuilders.post("/products/13860428")
+				.accept(MediaType.APPLICATION_JSON).content(productPrice)
+				.contentType(MediaType.APPLICATION_JSON)
+				).andReturn();
+		int status = mvcResult.getResponse().getStatus();
+		assertEquals(200, status);
+	}
 
 }
