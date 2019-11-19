@@ -41,6 +41,19 @@ public class PriceControllerTest {
 		mockMvc.perform(get("/product/13860428/price").contentType(MediaType.APPLICATION_JSON_VALUE))
 		.andExpect(status().isOk());
     }
+	
+	   @Test
+    public void priceDetailsException() throws Exception {
+		mockMvc.perform(get("/products/138604").contentType(MediaType.APPLICATION_JSON_VALUE))
+		.andExpect(status().is5xxServerError());
+    }
+    
+    
+    @Test
+    public void priceApi() throws Exception {
+		mockMvc.perform(get("/product/138604/price").contentType(MediaType.APPLICATION_JSON_VALUE))
+		.andExpect(status().is2xxSuccessful());
+    }
 
 	    @Test
     public void productPriceDetailsResponse() throws Exception {
